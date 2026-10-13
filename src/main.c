@@ -10,13 +10,15 @@ void main()
 {
     if (cpuid() == 0) {
         /* @todo: Clear BSS section.*/
+        extern char edata[], end[];
+        memset(edata, 0, end - edata);
 
         smp_init();
         uart_init();
         printk_init();
 
         /* @todo: Print "Hello, world! (Core 0)" */
-
+        printk("Hello, world! (Core 0)\n");
         arch_fence();
 
         // Set a flag indicating that the secondary CPUs can start executing.
@@ -27,6 +29,8 @@ void main()
         arch_fence();
 
         /* @todo: Print "Hello, world! (Core <core id>)" */
+        int coreid = (int)cpuid();
+        printk("Hello, world! (Core %d)\n", coreid);
     }
 
     set_return_addr(idle_entry);
