@@ -66,3 +66,9 @@ CMakeFiles/
 cmake_install.cmake
 CMakeCache.txt
 Makefile
+
+# Local experiment reports, screenshots and workspace instructions
+/output/
+
+# AGENTS.md
+AGENTS.md
